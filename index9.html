@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD Jobs Apply - অফিশিয়াল রিক্রুটমেন্ট পোর্টাল</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a 60%, #020617);
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .nav-glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .card-glass {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+        .input-dark {
+            background-color: rgba(15, 23, 42, 0.9);
+            border: 1px solid #334155;
+            color: #f8fafc;
+        }
+        .input-dark:focus {
+            border-color: #38bdf8;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+        }
+        .btn-primary-grad {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            transition: all 0.2s ease;
+        }
+        .btn-primary-grad:hover {
+            background: linear-gradient(135deg, #0369a1, #1d4ed8);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.5);
+        }
+        .admin-nav-tab.active {
+            border-bottom: 3px solid #38bdf8;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+        .hidden-section { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <nav class="nav-glass sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="showSection('public-portal')">
+                    <div class="bg-gradient-to-br from-sky-500 to-blue-700 p-2.5 rounded-xl text-white text-2xl shadow-lg shadow-sky-500/20">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-black tracking-wider text-white">BD JOBS <span class="text-sky-400">APPLY</span></h1>
+                        <p class="text-xs text-slate-400">অফিশিয়াল ক্যারিয়ার ও নিয়োগ পোর্টাল</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="showSection('public-portal')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 transition text-sm font-semibold text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-house text-sky-400"></i> হোম
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- SECTION 1: PUBLIC APPLICATION PORTAL -->
+        <section id="public-portal" class="space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="px-4 py-1.5 bg-sky-500/10 border border-sky-500/30 text-sky-400 rounded-full text-xs font-bold uppercase tracking-widest">
+                    <i class="fa-solid fa-circle-check mr-1"></i> অনলাইন নিয়োগ বিজ্ঞপ্তি
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">যোগ্যতা অনুযায়ী আপনার কাঙ্ক্ষিত পদে আবেদন করুন</h2>
+                <p class="text-slate-400 text-sm sm:text-base">নিচের ফর্মে পদ নির্বাচন করলে উক্ত পদের বেতন, শূন্যপদ এবং ন্যূনতম শিক্ষাগত যোগ্যতা স্বয়ংক্রিয়ভাবে প্রদর্শিত হবে।</p>
+            </div>
+
+            <div class="card-glass rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto">
+                <form id="applicationForm" onsubmit="handleApplicationSubmit(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-2">১. কাঙ্ক্ষিত পদ / ক্যাটাগরি নির্বাচন করুন *</label>
+                        <select id="pubCategorySelect" onchange="updatePublicRequirements()" required class="w-full px-4 py-3.5 rounded-xl input-dark text-sm transition">
+                            <option value="">-- পদ নির্বাচন করুন --</option>
+                        </select>
+                        <p id="noCategoryHint" class="text-xs text-amber-400 mt-1.5 hidden">
+                            <i class="fa-solid fa-triangle-exclamation"></i> বর্তমানে কোনো পদ যুক্ত করা হয়নি। কন্ট্রোল প্যানেল থেকে ক্যাটাগরি যুক্ত করুন।
+                        </p>
+                    </div>
+
+                    <!-- Job Details Box (Salary & Vacancy) -->
+                    <div id="jobDetailsBox" class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden">
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700 space-y-1">
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-money-bill-wave text-emerald-400"></i> মাসিক বেতন:
+                            </p>
+                            <p id="displaySalary" class="text-base font-bold text-emerald-400"></p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700 space-y-1">
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-users text-sky-400"></i> শূন্যপদ / ভেকেন্সি:
+                            </p>
+                            <p id="displayVacancy" class="text-base font-bold text-sky-400"></p>
+                        </div>
+                    </div>
+
+                    <div id="requirementDisplayBox" class="p-4 rounded-xl bg-sky-950/60 border border-sky-500/40 space-y-1 hidden">
+                        <p class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-graduation-cap"></i> এই পদের জন্য ন্যূনতম আবশ্যক যোগ্যতা:
+                        </p>
+                        <p id="minReqText" class="text-base font-bold text-white"></p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-2">২. আপনার সর্বোচ্চ শিক্ষাগত যোগ্যতা নির্বাচন করুন *</label>
+                        <select id="pubEducationSelect" required class="w-full px-4 py-3.5 rounded-xl input-dark text-sm transition">
+                            <option value="">-- প্রথমে পদ নির্বাচন করুন --</option>
+                        </select>
+                        <p class="text-xs text-slate-400 mt-1.5">* নির্ধারিত যোগ্যতার নিচের অপশনগুলো স্বয়ংক্রিয়ভাবে নিষ্ক্রিয় থাকবে।</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-2">৩. আবেদনকারীর সম্পূর্ণ নাম *</label>
+                        <input type="text" id="applicantName" placeholder="যেমন: মোঃ রহিম উদ্দিন" required class="w-full px-4 py-3.5 rounded-xl input-dark text-sm transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-2">৪. মোবাইল নম্বর *</label>
+                        <input type="tel" id="applicantPhone" placeholder="যেমন: 01712345678" pattern="01[0-9]{9}" required class="w-full px-4 py-3.5 rounded-xl input-dark text-sm transition">
+                        <p class="text-xs text-slate-400 mt-1">১১ সংখ্যার সচল মোবাইল নম্বর দিন।</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-2">৫. জীবনবৃত্তান্ত (CV) অথবা প্রয়োজনীয় ডকুমেন্ট (PDF/Image) *</label>
+                        <input type="file" id="applicantDocument" accept=".pdf,.jpg,.jpeg,.png" required class="w-full px-3 py-2.5 rounded-xl input-dark text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-sky-600 file:text-white hover:file:bg-sky-500 transition cursor-pointer">
+                        <p class="text-xs text-slate-400 mt-1">সর্বোচ্চ ২ মেগাবাইট সাইজ অনুমোদিত।</p>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl btn-primary-grad text-white font-bold text-base shadow-lg flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> আবেদন জমা দিন
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ADMIN CONTROL PANEL -->
+        <section id="admin-panel" class="hidden-section space-y-6">
+            <!-- Auth Modal -->
+            <div id="adminAuthModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+                <div class="card-glass rounded-2xl p-6 sm:p-8 max-w-sm w-full space-y-5 border border-slate-700">
+                    <div class="w-16 h-16 bg-sky-500/10 border border-sky-500/30 text-sky-400 rounded-full flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div class="text-center space-y-1">
+                        <h3 class="text-xl font-bold text-white">অ্যাডমিন কন্ট্রোল প্যানেল</h3>
+                        <p class="text-xs text-slate-400">সুরক্ষিত ড্যাশবোর্ডে প্রবেশ করতে পাসওয়ার্ড দিন</p>
+                    </div>
+                    <input type="password" id="adminPassInput" onkeypress="if(event.key==='Enter') verifyAdminLogin()" placeholder="পাসওয়ার্ড লিখুন" class="w-full px-4 py-3 rounded-xl input-dark text-center font-mono text-lg">
+                    <button onclick="verifyAdminLogin()" class="w-full py-3 rounded-xl btn-primary-grad text-white font-bold">লগইন করুন</button>
+                    <button onclick="showSection('public-portal')" class="w-full py-1 text-xs text-slate-400 hover:text-white text-center">হোম পেজে ফিরে যান</button>
+                </div>
+            </div>
+
+            <!-- Authenticated Dashboard UI -->
+            <div id="adminDashboardBody" class="space-y-6">
+                <!-- Dashboard Header -->
+                <div class="card-glass p-6 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high text-sky-400"></i> কন্ট্রোল প্যানেল ড্যাশবোর্ড
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">আবেদন ব্যবস্থাপনা, বেতন ও ভেকেন্সিসহ ক্যাটাগরি নিয়ন্ত্রণ</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button onclick="switchTab('tab-new')" id="tab-btn-tab-new" class="admin-nav-tab active px-3 py-2 text-xs sm:text-sm text-slate-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-inbox"></i> নতুন (<span id="count-new">0</span>)
+                        </button>
+                        <button onclick="switchTab('tab-accepted')" id="tab-btn-tab-accepted" class="admin-nav-tab px-3 py-2 text-xs sm:text-sm text-slate-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i> গৃহীত (<span id="count-accepted">0</span>)
+                        </button>
+                        <button onclick="switchTab('tab-rejected')" id="tab-btn-tab-rejected" class="admin-nav-tab px-3 py-2 text-xs sm:text-sm text-slate-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-xmark text-rose-400"></i> প্রত্যাখ্যাত (<span id="count-rejected">0</span>)
+                        </button>
+                        <button onclick="switchTab('tab-settings')" id="tab-btn-tab-settings" class="admin-nav-tab px-3 py-2 text-xs sm:text-sm text-slate-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-sliders text-amber-400"></i> ক্যাটাগরি ও যোগ্যতা সেটিংস
+                        </button>
+                        <button onclick="logoutAdmin()" class="px-3.5 py-2 bg-rose-600/90 hover:bg-rose-600 text-white rounded-lg text-xs sm:text-sm font-semibold transition">লগআউট</button>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: APPLICANT LISTS -->
+                <div id="tab-applicant-list" class="card-glass rounded-2xl p-6">
+                    <h4 id="applicantListTitle" class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ul text-sky-400"></i> নতুন আবেদন তালিকা
+                    </h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900/80 text-slate-300 text-xs uppercase tracking-wider font-bold border-b border-slate-700">
+                                    <th class="p-3.5">আবেদনকারীর নাম</th>
+                                    <th class="p-3.5">পদবী</th>
+                                    <th class="p-3.5">যোগ্যতা</th>
+                                    <th class="p-3.5">মোবাইল</th>
+                                    <th class="p-3.5">ডকুমেন্ট</th>
+                                    <th class="p-3.5 text-center">অ্যাকশন</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicantTableBody" class="divide-y divide-slate-800 text-sm text-slate-200"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: CUSTOM QUALIFICATIONS & CATEGORY SETTINGS -->
+                <div id="tab-settings" class="hidden-section space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        
+                        <!-- STEP 1: MANAGE QUALIFICATIONS -->
+                        <div class="card-glass rounded-2xl p-6 space-y-5">
+                            <div class="border-b border-slate-700 pb-3">
+                                <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-graduation-cap text-sky-400"></i> ১. শিক্ষাগত যোগ্যতার স্তর তৈরি ও পরিচালনা
+                                </h4>
+                                <p class="text-xs text-slate-400 mt-1">সর্বনিম্ন থেকে সর্বোচ্চ ক্রম অনুযায়ী যোগ্যতা যুক্ত করুন (যেমন: লেভেল ১ = এসএসসি, লেভেল ২ = এইচএসসি)।</p>
+                            </div>
+
+                            <form onsubmit="handleAddQualification(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="sm:col-span-2">
+                                    <input type="text" id="newQualName" placeholder="যোগ্যতার নাম (যেমন: এসএসসি / অনার্স)" required class="w-full px-3.5 py-2.5 rounded-xl input-dark text-sm">
+                                </div>
+                                <div>
+                                    <input type="number" id="newQualRank" min="1" max="100" placeholder="ক্রম/লেভেল (১, ২...)" required class="w-full px-3.5 py-2.5 rounded-xl input-dark text-sm">
+                                </div>
+                                <button type="submit" class="sm:col-span-3 py-2.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-bold text-sm transition">
+                                    <i class="fa-solid fa-plus mr-1"></i> যোগ্যতা যুক্ত করুন
+                                </button>
+                            </form>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse text-sm">
+                                    <thead>
+                                        <tr class="bg-slate-900/80 text-slate-300 text-xs uppercase">
+                                            <th class="p-3">ক্রম/লেভেল</th>
+                                            <th class="p-3">যোগ্যতার নাম</th>
+                                            <th class="p-3 text-center">মুছুন</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="qualificationTableBody" class="divide-y divide-slate-800 text-slate-200"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2: MANAGE CATEGORIES WITH SALARY & VACANCY -->
+                        <div class="card-glass rounded-2xl p-6 space-y-5">
+                            <div class="border-b border-slate-700 pb-3">
+                                <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-folder-plus text-emerald-400"></i> ২. পদ, বেতন ও ভেকেন্সি সেট করুন
+                                </h4>
+                                <p class="text-xs text-slate-400 mt-1">পদের নাম, বেতন, শূন্যপদ এবং ন্যূনতম আবশ্যক যোগ্যতা সিলেক্ট করুন।</p>
+                            </div>
+
+                            <form onsubmit="handleCategoryAdd(event)" class="space-y-3">
+                                <div>
+                                    <input type="text" id="newCatTitle" placeholder="পদের নাম (যেমন: কোম্পানি ম্যানেজার)" required class="w-full px-3.5 py-2.5 rounded-xl input-dark text-sm">
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <input type="text" id="newCatSalary" placeholder="মাসিক বেতন (যেমন: ২৫,০০০ টাকা)" required class="w-full px-3.5 py-2.5 rounded-xl input-dark text-sm">
+                                    <input type="text" id="newCatVacancy" placeholder="শূন্যপদ সংখ্যা (যেমন: ২ জন)" required class="w-full px-3.5 py-2.5 rounded-xl input-dark text-sm">
+                                </div>
+                                <div>
+                                    <select id="newCatMinQualSelect" required class="w-full px-3.5 py-2.5 rounded-xl input-dark text-sm">
+                                        <option value="">-- আবশ্যক ন্যূনতম যোগ্যতা সিলেক্ট করুন --</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-sm transition">
+                                    <i class="fa-solid fa-check mr-1"></i> ক্যাটাগরি সেভ করুন
+                                </button>
+                            </form>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse text-sm">
+                                    <thead>
+                                        <tr class="bg-slate-900/80 text-slate-300 text-xs uppercase">
+                                            <th class="p-3">পদ ও বিবরণ</th>
+                                            <th class="p-3">যোগ্যতা</th>
+                                            <th class="p-3 text-center">মুছুন</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="categoryTableBody" class="divide-y divide-slate-800 text-slate-200"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password Change Box -->
+                    <div class="card-glass rounded-2xl p-6 max-w-md">
+                        <h4 class="text-base font-bold text-white mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-key text-amber-400"></i> অ্যাডমিন পাসওয়ার্ড পরিবর্তন করুন
+                        </h4>
+                        <div class="flex gap-2">
+                            <input type="password" id="newAdminPass" placeholder="নতুন পাসওয়ার্ড লিখুন" class="flex-grow px-3.5 py-2 rounded-xl input-dark text-sm">
+                            <button onclick="changeAdminPassword()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-bold text-xs transition">আপডেট</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Applicant View Modal -->
+    <div id="applicantModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="card-glass rounded-2xl p-6 max-w-md w-full relative space-y-4 border border-slate-700">
+            <button onclick="closeApplicantModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-times"></i></button>
+            <h3 class="text-xl font-bold text-white border-b border-slate-700 pb-2">আবেদনকারীর বিস্তারিত তথ্য</h3>
+            <div id="modalContentBody" class="space-y-2.5 text-sm text-slate-200"></div>
+            <div id="modalActionFooter" class="pt-4 border-t border-slate-700 flex justify-end gap-2"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-300 border-t border-slate-800/80 mt-auto pt-12 pb-8 text-xs sm:text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-3">
+                    <h5 class="text-base font-bold text-sky-400 tracking-wider">BD JOBS APPLY</h5>
+                    <p class="text-slate-400 leading-relaxed text-xs">বাংলাদেশের একটি আধুনিক ও স্বচ্ছ রিক্রুটমেন্ট পোর্টাল। যোগ্য প্রার্থীদের সঠিক কর্মসংস্থানে যুক্ত করাই আমাদের মূল লক্ষ্য।</p>
+                </div>
+                <div class="space-y-2">
+                    <h5 class="font-bold text-white border-b border-slate-800 pb-2">নীতিমালা ও শর্তাবলী</h5>
+                    <ul class="space-y-1.5 text-slate-400">
+                        <li><a href="javascript:void(0)" onclick="showPolicyModal('terms')" class="hover:text-sky-400 transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-sky-500"></i> ব্যবহারের শর্তাবলী</a></li>
+                        <li><a href="javascript:void(0)" onclick="showPolicyModal('privacy')" class="hover:text-sky-400 transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-sky-500"></i> গোপনীয়তা নীতি (Privacy Policy)</a></li>
+                        <li><a href="javascript:void(0)" onclick="showPolicyModal('security')" class="hover:text-sky-400 transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-sky-500"></i> ডাটা নিরাপত্তা ও সুরক্ষা</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-2">
+                    <h5 class="font-bold text-white border-b border-slate-800 pb-2">আবেদন নির্দেশিকা</h5>
+                    <p class="text-slate-400 text-xs">আবেদন করার পূর্বে প্রতিটি পদের ন্যূনতম শিক্ষাগত যোগ্যতা যাচাই করে সঠিক ডকুমেন্ট আপলোড করুন।</p>
+                </div>
+                <div class="space-y-2">
+                    <h5 class="font-bold text-white border-b border-slate-800 pb-2">যোগাযোগ</h5>
+                    <p class="text-slate-400 text-xs"><i class="fa-solid fa-location-dot text-sky-400 mr-2"></i> ঢাকা, বাংলাদেশ</p>
+                    <p class="text-slate-400 text-xs"><i class="fa-solid fa-envelope text-sky-400 mr-2"></i> support@bdjobsapply.com</p>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between text-slate-500 text-xs gap-4">
+                <p>&copy; ২০২৬ BD Jobs Apply. সর্বস্বত্ব সংরক্ষিত।</p>
+                <div class="flex items-center space-x-6">
+                    <span class="flex items-center gap-1 text-emerald-400"><i class="fa-solid fa-shield-halved"></i> 100% Secure Recruitment System</span>
+                    <!-- Secret Admin Access Trigger -->
+                    <button onclick="checkAdminAccess()" title="Admin Control Panel" class="text-slate-700 hover:text-sky-400 transition p-1">
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Policy Modal -->
+    <div id="policyModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="card-glass rounded-2xl p-6 sm:p-8 max-w-lg w-full relative max-h-[80vh] overflow-y-auto space-y-4 border border-slate-700">
+            <button onclick="closePolicyModal()" class="sticky top-0 float-right text-slate-400 hover:text-white text-xl bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-times"></i></button>
+            <h3 id="policyModalTitle" class="text-xl font-bold text-white border-b border-slate-700 pb-2"></h3>
+            <div id="policyModalBody" class="text-sm text-slate-300 leading-relaxed space-y-3"></div>
+            <button onclick="closePolicyModal()" class="w-full py-2.5 btn-primary-grad text-white rounded-xl font-bold text-sm">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        const ADMIN_PASSWORD_KEY = 'bdjobs_admin_pass_v3';
+        const QUAL_STORAGE_KEY = 'bdjobs_qualifications_v3';
+        const CAT_STORAGE_KEY = 'bdjobs_categories_v3';
+        const APP_STORAGE_KEY = 'bdjobs_applications_v3';
+        const DEFAULT_PASS = '12345';
+
+        function initSystem() {
+            if (!localStorage.getItem(QUAL_STORAGE_KEY)) {
+                localStorage.setItem(QUAL_STORAGE_KEY, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(CAT_STORAGE_KEY)) {
+                localStorage.setItem(CAT_STORAGE_KEY, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(APP_STORAGE_KEY)) {
+                localStorage.setItem(APP_STORAGE_KEY, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(ADMIN_PASSWORD_KEY)) {
+                localStorage.setItem(ADMIN_PASSWORD_KEY, DEFAULT_PASS);
+            }
+            renderPublicCategorySelect();
+        }
+
+        function getQualifications() {
+            const list = JSON.parse(localStorage.getItem(QUAL_STORAGE_KEY) || '[]');
+            return list.sort((a, b) => a.rank - b.rank);
+        }
+
+        function getCategories() {
+            return JSON.parse(localStorage.getItem(CAT_STORAGE_KEY) || '[]');
+        }
+
+        function getApplications() {
+            return JSON.parse(localStorage.getItem(APP_STORAGE_KEY) || '[]');
+        }
+
+        function showSection(sectionId) {
+            document.getElementById('public-portal').classList.add('hidden-section');
+            document.getElementById('admin-panel').classList.add('hidden-section');
+            closeApplicantModal();
+            closePolicyModal();
+
+            if (sectionId === 'public-portal') {
+                document.getElementById('public-portal').classList.remove('hidden-section');
+                renderPublicCategorySelect();
+            } else if (sectionId === 'admin-panel') {
+                document.getElementById('admin-panel').classList.remove('hidden-section');
+            }
+        }
+
+        function checkAdminAccess() {
+            showSection('admin-panel');
+            if (sessionStorage.getItem('bdjobs_admin_logged_v3') === 'true') {
+                document.getElementById('adminAuthModal').classList.add('hidden');
+                renderAdminDashboard();
+            } else {
+                document.getElementById('adminAuthModal').classList.remove('hidden');
+                document.getElementById('adminPassInput').value = '';
+            }
+        }
+
+        function verifyAdminLogin() {
+            const inputPass = document.getElementById('adminPassInput').value;
+            const storedPass = localStorage.getItem(ADMIN_PASSWORD_KEY) || DEFAULT_PASS;
+            if (inputPass === storedPass) {
+                sessionStorage.setItem('bdjobs_admin_logged_v3', 'true');
+                document.getElementById('adminAuthModal').classList.add('hidden');
+                renderAdminDashboard();
+            } else {
+                alert('ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।');
+            }
+        }
+
+        function changeAdminPassword() {
+            const newPass = document.getElementById('newAdminPass').value.trim();
+            if (newPass.length < 4) {
+                alert('পাসওয়ার্ড কমপক্ষে ৪ অক্ষরের হতে হবে।');
+                return;
+            }
+            localStorage.setItem(ADMIN_PASSWORD_KEY, newPass);
+            document.getElementById('newAdminPass').value = '';
+            alert('পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('bdjobs_admin_logged_v3');
+            showSection('public-portal');
+        }
+
+        function renderPublicCategorySelect() {
+            const categories = getCategories();
+            const select = document.getElementById('pubCategorySelect');
+            const hint = document.getElementById('noCategoryHint');
+            
+            select.innerHTML = '<option value="">-- পদ নির্বাচন করুন --</option>';
+            if (categories.length === 0) {
+                hint.classList.remove('hidden');
+            } else {
+                hint.classList.add('hidden');
+                categories.forEach(cat => {
+                    select.innerHTML += `<option value="${cat.id}">${cat.title}</option>`;
+                });
+            }
+            document.getElementById('jobDetailsBox').classList.add('hidden');
+            document.getElementById('requirementDisplayBox').classList.add('hidden');
+            document.getElementById('pubEducationSelect').innerHTML = '<option value="">-- প্রথমে পদ নির্বাচন করুন --</option>';
+        }
+
+        function updatePublicRequirements() {
+            const catId = document.getElementById('pubCategorySelect').value;
+            const categories = getCategories();
+            const qualifications = getQualifications();
+            const eduSelect = document.getElementById('pubEducationSelect');
+            const reqBox = document.getElementById('requirementDisplayBox');
+            const jobBox = document.getElementById('jobDetailsBox');
+            
+            const selectedCat = categories.find(c => c.id === catId);
+            if (!selectedCat) {
+                reqBox.classList.add('hidden');
+                jobBox.classList.add('hidden');
+                eduSelect.innerHTML = '<option value="">-- প্রথমে পদ নির্বাচন করুন --</option>';
+                return;
+            }
+
+            // Display Salary & Vacancy
+            document.getElementById('displaySalary').innerText = selectedCat.salary;
+            document.getElementById('displayVacancy').innerText = selectedCat.vacancy;
+            jobBox.classList.remove('hidden');
+
+            const minQual = qualifications.find(q => q.id === selectedCat.minQualId);
+            const minRank = minQual ? minQual.rank : 0;
+
+            document.getElementById('minReqText').innerText = minQual ? minQual.name : 'নির্ধারিত নেই';
+            reqBox.classList.remove('hidden');
+
+            eduSelect.innerHTML = '<option value="">-- আপনার শিক্ষাগত যোগ্যতা সিলেক্ট করুন --</option>';
+            qualifications.forEach(q => {
+                const isLower = q.rank < minRank;
+                eduSelect.innerHTML += `
+                    <option value="${q.id}" ${isLower ? 'disabled style="color:#64748b;"' : ''}>
+                        ${q.name} ${isLower ? '(আবেদনের জন্য প্রযোজ্য নয়)' : ''}
+                    </option>
+                `;
+            });
+        }
+
+        function handleApplicationSubmit(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('applicantDocument');
+            const file = fileInput.files[0];
+
+            if (!file) return;
+            if (file.size > 2 * 1024 * 1024) {
+                alert('ফাইলের সাইজ ২ মেগাবাইটের বেশি। দয়া করে ২ মেগাবাইটের নিচের ফাইল আপলোড করুন।');
+                return;
+            }
+
+            const qualId = document.getElementById('pubEducationSelect').value;
+            const qualObj = getQualifications().find(q => q.id === qualId);
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const newApp = {
+                    id: 'APP-' + Math.floor(100000 + Math.random() * 900000),
+                    categoryId: document.getElementById('pubCategorySelect').value,
+                    categoryTitle: document.getElementById('pubCategorySelect').options[document.getElementById('pubCategorySelect').selectedIndex].text,
+                    applicantName: document.getElementById('applicantName').value,
+                    phone: document.getElementById('applicantPhone').value,
+                    qualName: qualObj ? qualObj.name : 'অজানা',
+                    documentData: event.target.result,
+                    documentName: file.name,
+                    status: 'new',
+                    submittedAt: new Date().toLocaleString('bn-BD')
+                };
+
+                try {
+                    const apps = getApplications();
+                    apps.push(newApp);
+                    localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(apps));
+                    
+                    alert('আপনার আবেদন সফলভাবে জমা হয়েছে! আবেদন আইডি: ' + newApp.id);
+                    document.getElementById('applicationForm').reset();
+                    updatePublicRequirements();
+                } catch (err) {
+                    alert('ব্রাউজার স্টোরেজ পূর্ণ হয়ে গেছে। কন্ট্রোল প্যানেল থেকে পুরনো ডাটা মুছে ফেলুন।');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        let activeTab = 'tab-new';
+        function switchTab(tabId) {
+            document.querySelectorAll('.admin-nav-tab').forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-btn-${tabId}`).classList.add('active');
+            activeTab = tabId;
+            renderAdminDashboard();
+        }
+
+        function renderAdminDashboard() {
+            const apps = getApplications();
+
+            document.getElementById('count-new').innerText = apps.filter(a => a.status === 'new').length;
+            document.getElementById('count-accepted').innerText = apps.filter(a => a.status === 'accepted').length;
+            document.getElementById('count-rejected').innerText = apps.filter(a => a.status === 'rejected').length;
+
+            if (activeTab === 'tab-settings') {
+                document.getElementById('tab-applicant-list').classList.add('hidden-section');
+                document.getElementById('tab-settings').classList.remove('hidden-section');
+                renderQualificationAndCategorySettings();
+            } else {
+                document.getElementById('tab-settings').classList.add('hidden-section');
+                document.getElementById('tab-applicant-list').classList.remove('hidden-section');
+
+                const statusFilter = activeTab === 'tab-new' ? 'new' : (activeTab === 'tab-accepted' ? 'accepted' : 'rejected');
+                document.getElementById('applicantListTitle').innerHTML = `<i class="fa-solid fa-list-ul text-sky-400"></i> ${activeTab === 'tab-new' ? 'নতুন আবেদন তালিকা' : (activeTab === 'tab-accepted' ? 'গৃহীত আবেদনকারীগণ' : 'প্রত্যাখ্যাত তালিকা')}`;
+
+                const tbody = document.getElementById('applicantTableBody');
+                tbody.innerHTML = '';
+                const filteredApps = apps.filter(a => a.status === statusFilter);
+
+                if (filteredApps.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-400">কোনো আবেদন পাওয়া যায়নি।</td></tr>`;
+                    return;
+                }
+
+                filteredApps.forEach(app => {
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-slate-800/50 transition cursor-pointer" onclick="openApplicantModal('${app.id}')">
+                            <td class="p-3.5 font-bold text-white">${app.applicantName}</td>
+                            <td class="p-3.5"><span class="px-2.5 py-1 bg-sky-500/10 border border-sky-500/30 text-sky-300 rounded-md text-xs font-semibold">${app.categoryTitle}</span></td>
+                            <td class="p-3.5 text-xs text-slate-300">${app.qualName}</td>
+                            <td class="p-3.5 text-xs text-slate-200 font-mono font-bold">${app.phone}</td>
+                            <td class="p-3.5" onclick="event.stopPropagation()">
+                                <a href="${app.documentData}" download="${app.documentName}" class="px-3 py-1.5 bg-slate-800 hover:bg-sky-600 text-white rounded-lg text-xs transition inline-flex items-center gap-1 font-semibold border border-slate-700">
+                                    <i class="fa-solid fa-download"></i> ফাইল
+                                </a>
+                            </td>
+                            <td class="p-3.5 text-center space-x-1" onclick="event.stopPropagation()">
+                                <button onclick="openApplicantModal('${app.id}')" title="বিস্তারিত" class="px-2.5 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded text-xs transition"><i class="fa-solid fa-eye"></i></button>
+                                ${app.status !== 'accepted' ? `<button onclick="updateAppStatus('${app.id}', 'accepted')" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-semibold text-xs transition">গ্রহণ</button>` : ''}
+                                ${app.status !== 'rejected' ? `<button onclick="updateAppStatus('${app.id}', 'rejected')" class="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded font-semibold text-xs transition">প্রত্যাখ্যান</button>` : ''}
+                                <button onclick="deleteApplication('${app.id}')" title="মুছে ফেলুন" class="px-2 py-1.5 text-slate-400 hover:text-rose-400 text-xs transition"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+        }
+
+        function handleAddQualification(e) {
+            e.preventDefault();
+            const name = document.getElementById('newQualName').value.trim();
+            const rank = parseInt(document.getElementById('newQualRank').value);
+
+            const quals = getQualifications();
+            if (quals.some(q => q.rank === rank)) {
+                alert(`লেভেল/ক্রম ${rank} ইতিমধ্যে ব্যবহৃত হয়েছে। অন্য একটি ক্রম নম্বর দিন।`);
+                return;
+            }
+
+            quals.push({
+                id: 'qual-' + Date.now(),
+                name: name,
+                rank: rank
+            });
+            localStorage.setItem(QUAL_STORAGE_KEY, JSON.stringify(quals));
+            document.getElementById('newQualName').value = '';
+            document.getElementById('newQualRank').value = '';
+            renderQualificationAndCategorySettings();
+        }
+
+        function deleteQualification(id) {
+            const cats = getCategories();
+            if (cats.some(c => c.minQualId === id)) {
+                alert('এই যোগ্যতাটি একটি ক্যাটাগরিতে আবশ্যক হিসেবে যুক্ত আছে। আগে সেই ক্যাটাগরিটি মুছুন।');
+                return;
+            }
+            if (confirm('এই যোগ্যতাটি মুছে ফেলতে চান?')) {
+                const quals = getQualifications().filter(q => q.id !== id);
+                localStorage.setItem(QUAL_STORAGE_KEY, JSON.stringify(quals));
+                renderQualificationAndCategorySettings();
+            }
+        }
+
+        function handleCategoryAdd(e) {
+            e.preventDefault();
+            const title = document.getElementById('newCatTitle').value.trim();
+            const salary = document.getElementById('newCatSalary').value.trim();
+            const vacancy = document.getElementById('newCatVacancy').value.trim();
+            const minQualId = document.getElementById('newCatMinQualSelect').value;
+
+            if (!minQualId) {
+                alert('দয়া করে ন্যূনতম আবশ্যক যোগ্যতা সিলেক্ট করুন।');
+                return;
+            }
+
+            const cats = getCategories();
+            cats.push({
+                id: 'cat-' + Date.now(),
+                title: title,
+                salary: salary,
+                vacancy: vacancy,
+                minQualId: minQualId
+            });
+            localStorage.setItem(CAT_STORAGE_KEY, JSON.stringify(cats));
+            document.getElementById('newCatTitle').value = '';
+            document.getElementById('newCatSalary').value = '';
+            document.getElementById('newCatVacancy').value = '';
+            document.getElementById('newCatMinQualSelect').value = '';
+            renderQualificationAndCategorySettings();
+            renderPublicCategorySelect();
+        }
+
+        function deleteCategory(id) {
+            if (confirm('এই ক্যাটাগরিটি মুছে ফেলতে চান?')) {
+                const cats = getCategories().filter(c => c.id !== id);
+                localStorage.setItem(CAT_STORAGE_KEY, JSON.stringify(cats));
+                renderQualificationAndCategorySettings();
+                renderPublicCategorySelect();
+            }
+        }
+
+        function renderQualificationAndCategorySettings() {
+            const quals = getQualifications();
+            const cats = getCategories();
+
+            const qualTbody = document.getElementById('qualificationTableBody');
+            const qualSelect = document.getElementById('newCatMinQualSelect');
+            qualTbody.innerHTML = '';
+            qualSelect.innerHTML = '<option value="">-- আবশ্যক ন্যূনতম যোগ্যতা সিলেক্ট করুন --</option>';
+
+            if (quals.length === 0) {
+                qualTbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400 text-xs">কোনো যোগ্যতা যুক্ত করা হয়নি। উপরে থেকে যুক্ত করুন।</td></tr>`;
+            } else {
+                quals.forEach(q => {
+                    qualTbody.innerHTML += `
+                        <tr>
+                            <td class="p-3 font-mono text-sky-400 font-bold">লেভেল ${q.rank}</td>
+                            <td class="p-3 font-semibold text-white">${q.name}</td>
+                            <td class="p-3 text-center">
+                                <button onclick="deleteQualification('${q.id}')" class="text-rose-400 hover:text-rose-300 p-1"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                    qualSelect.innerHTML += `<option value="${q.id}">${q.name} (লেভেল ${q.rank})</option>`;
+                });
+            }
+
+            const catTbody = document.getElementById('categoryTableBody');
+            catTbody.innerHTML = '';
+
+            if (cats.length === 0) {
+                catTbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400 text-xs">কোনো ক্যাটাগরি যুক্ত করা হয়নি।</td></tr>`;
+            } else {
+                cats.forEach(c => {
+                    const qObj = quals.find(q => q.id === c.minQualId);
+                    catTbody.innerHTML += `
+                        <tr>
+                            <td class="p-3 space-y-1">
+                                <p class="font-bold text-white text-sm">${c.title}</p>
+                                <p class="text-xs text-emerald-400"><i class="fa-solid fa-money-bill"></i> বেতন: ${c.salary}</p>
+                                <p class="text-xs text-sky-400"><i class="fa-solid fa-users"></i> ভেকেন্সি: ${c.vacancy}</p>
+                            </td>
+                            <td class="p-3">
+                                <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded-full text-xs font-semibold border border-slate-700">
+                                    ${qObj ? qObj.name : 'নির্ধারিত নেই'}
+                                </span>
+                            </td>
+                            <td class="p-3 text-center">
+                                <button onclick="deleteCategory('${c.id}')" class="text-rose-400 hover:text-rose-300 p-1"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+        }
+
+        function updateAppStatus(id, newStatus) {
+            const apps = getApplications().map(a => a.id === id ? {...a, status: newStatus} : a);
+            localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(apps));
+            closeApplicantModal();
+            renderAdminDashboard();
+        }
+
+        function deleteApplication(id) {
+            if (confirm('এই আবেদনটি স্থায়ীভাবে মুছে ফেলতে চান?')) {
+                const apps = getApplications().filter(a => a.id !== id);
+                localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(apps));
+                closeApplicantModal();
+                renderAdminDashboard();
+            }
+        }
+
+        function openApplicantModal(id) {
+            const app = getApplications().find(a => a.id === id);
+            if (!app) return;
+
+            document.getElementById('modalContentBody').innerHTML = `
+                <p><strong>আবেদন আইডি:</strong> <span class="font-mono text-xs bg-slate-800 px-2 py-0.5 rounded text-sky-400">${app.id}</span></p>
+                <p><strong>আবেদনকারীর নাম:</strong> ${app.applicantName}</p>
+                <p><strong>মোবাইল নম্বর:</strong> ${app.phone}</p>
+                <p><strong>আবেদনকৃত পদ:</strong> ${app.categoryTitle}</p>
+                <p><strong>শিক্ষাগত যোগ্যতা:</strong> ${app.qualName}</p>
+                <p><strong>আবেদনের সময়:</strong> ${app.submittedAt}</p>
+                <div class="mt-4 p-4 bg-slate-900/90 border border-slate-700 rounded-xl text-center space-y-2">
+                    <p class="text-xs text-slate-400">সংযুক্ত ফাইল: <strong class="text-white">${app.documentName}</strong></p>
+                    <a href="${app.documentData}" download="${app.documentName}" class="px-4 py-2 btn-primary-grad text-white rounded-lg text-xs font-semibold inline-flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-arrow-down"></i> ডকুমেন্ট ডাউনলোড করুন
+                    </a>
+                </div>
+            `;
+
+            document.getElementById('modalActionFooter').innerHTML = `
+                ${app.status !== 'accepted' ? `<button onclick="updateAppStatus('${app.id}', 'accepted')" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-xs font-bold hover:bg-emerald-500">গ্রহণ করুন</button>` : ''}
+                ${app.status !== 'rejected' ? `<button onclick="updateAppStatus('${app.id}', 'rejected')" class="px-4 py-2 bg-rose-600 text-white rounded-lg text-xs font-bold hover:bg-rose-500">প্রত্যাখ্যান করুন</button>` : ''}
+                <button onclick="closeApplicantModal()" class="px-4 py-2 bg-slate-700 text-white rounded-lg text-xs font-bold hover:bg-slate-600">বন্ধ করুন</button>
+            `;
+
+            const modal = document.getElementById('applicantModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeApplicantModal() {
+            const modal = document.getElementById('applicantModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function showPolicyModal(type) {
+            const modal = document.getElementById('policyModal');
+            const titleEl = document.getElementById('policyModalTitle');
+            const bodyEl = document.getElementById('policyModalBody');
+
+            if (type === 'terms') {
+                titleEl.innerText = "ব্যবহারকারীর নীতিমালা (Terms & Conditions)";
+                bodyEl.innerHTML = `
+                    <p>১. BD Jobs Apply প্ল্যাটফর্মটি চাকরির সন্ধানে থাকা প্রার্থীদের জন্য সম্পূর্ণ বিনামূল্যে আবেদন করার সুবিধা প্রদান করে।</p>
+                    <p>২. প্রতিটি পদের জন্য নির্ধারিত ন্যূনতম শিক্ষাগত যোগ্যতা থাকা বাধ্যতামূলক। অসম্পূর্ণ বা মিথ্যা তথ্য প্রদান করলে আবেদন বাতিল বলে গণ্য হবে।</p>
+                    <p>৩. কর্তৃপক্ষ যেকোনো সময় নিয়োগ বিজ্ঞপ্তি পরিবর্তন বা পরিবর্ধন করার অধিকার সংরক্ষণ করে।</p>
+                `;
+            } else if (type === 'privacy') {
+                titleEl.innerText = "গোপনীয়তা নীতি (Privacy Policy)";
+                bodyEl.innerHTML = `
+                    <p>১. আবেদনকারীর নাম, মোবাইল নম্বর এবং আপলোডকৃত জীবনবৃত্তান্ত (CV) কেবলমাত্র নিয়োগ প্রক্রিয়ার কাজে ব্যবহৃত হবে।</p>
+                    <p>২. প্রার্থীর ব্যক্তিগত তথ্য কোনো তৃতীয় পক্ষের নিকট হস্তান্তর বা বিক্রয় করা হয় না।</p>
+                `;
+            } else if (type === 'security') {
+                titleEl.innerText = "ডাটা নিরাপত্তা ও সুরক্ষা";
+                bodyEl.innerHTML = `
+                    <p>১. এই সিস্টেমটি সম্পূর্ণভাবে ব্রাউজারের লোকাল স্টোরেজ প্রযুক্তি ব্যবহার করে পরিচালিত হয়।</p>
+                    <p>২. অ্যাডমিন কন্ট্রোল প্যানেলটি পাসওয়ার্ড দ্বারা সুরক্ষিত, ফলে অনুমোদিত ব্যক্তি ব্যতীত কেউ প্রার্থীদের তথ্য দেখতে পারবেন না।</p>
+                `;
+            }
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePolicyModal() {
+            const modal = document.getElementById('policyModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        window.onload = initSystem;
+    </script>
+</body>
+</html>
